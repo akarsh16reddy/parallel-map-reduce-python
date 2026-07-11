@@ -5,6 +5,8 @@ data. The installable `parallel_map_reduce` package includes a command-line
 interface and processes input incrementally, so the complete dataset does not
 need to be loaded into memory.
 
+> Historical single-run results for 86,618,505 rows (excluding file-read time): sequential `80.65s`, parallel map with reduce `24.73s` on 8-core AMD Ryzen 5000 series Machine
+
 ## Quick start
 
 Python 3.10 or newer is required.
@@ -54,6 +56,7 @@ The raw Google Books archive and extracted data are intentionally excluded from
 Git because they are very large.
 
 Dataset downloadable at ![https://storage.googleapis.com/books/ngrams/books/googlebooks-eng-all-1gram-20120701-a.gz](https://storage.googleapis.com/books/ngrams/books/googlebooks-eng-all-1gram-20120701-a.gz)
+
 
 ## Project layout
 
