@@ -1,12 +1,8 @@
 # Parallel Map-Reduce in Python
 
-A small, practical collection of examples showing how CPU-bound work can be
-distributed across processes and coordinated with `asyncio`. The examples build
-from basic `multiprocessing.Process` usage to a parallel map-reduce over Google
-Books Ngram data.
-
-The repository also includes an installable `parallel_map_reduce` package. Its
-CLI processes the input file incrementally, so the complete dataset does not
+A process-based map-reduce implementation for aggregating Google Books Ngram
+data. The installable `parallel_map_reduce` package includes a command-line
+interface and processes input incrementally, so the complete dataset does not
 need to be loaded into memory.
 
 ## Quick start
@@ -16,7 +12,7 @@ Python 3.10 or newer is required.
 ```powershell
 python -m venv .venv
 .venv\Scripts\Activate.ps1
-python -m pip install -e ".[dev,examples]"
+python -m pip install -e ".[dev]"
 python -m unittest discover -s tests
 ```
 
@@ -47,29 +43,23 @@ word<TAB>year<TAB>match_count<TAB>volume_count
 Counts are summed by word across every year. Blank rows are ignored; malformed
 rows produce an error that includes the bad line.
 
-## Learning sequence
+## How it works
 
-The numbered scripts are standalone examples:
-
-| Script | Topic |
-| --- | --- |
-| `6_1`–`6_5` | Processes, pools, executors, and `asyncio` integration |
-| `6_7` | Sequential Google Ngram aggregation |
-| `6_8` | Parallel map with a serial reduce |
-| `6_9` | Parallel map and multi-stage parallel reduce |
-| `6_10`–`6_13` | Shared memory, race conditions, and locks |
-| `6_14` | Reporting progress from parallel map workers |
+The input is divided into configurable chunks. A process pool maps each chunk
+to a partial word-frequency counter, then the partial counters are reduced into
+the final result. Reading and partitioning are incremental to keep memory usage
+bounded relative to the configured chunk size and process-pool buffering.
 
 The raw Google Books archive and extracted data are intentionally excluded from
-Git because they are very large. Existing local copies remain available to the
-scripts.
+Git because they are very large.
+
+Dataset downloadable at ![https://storage.googleapis.com/books/ngrams/books/googlebooks-eng-all-1gram-20120701-a.gz](https://storage.googleapis.com/books/ngrams/books/googlebooks-eng-all-1gram-20120701-a.gz)
 
 ## Project layout
 
 ```text
 src/parallel_map_reduce/  Reusable library and command-line interface
 tests/                    Dependency-free unit and process-pool integration tests
-6_*.py                    Original educational examples
 ```
 
 ## Notes

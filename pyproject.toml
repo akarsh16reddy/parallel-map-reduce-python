@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "parallel-map-reduce"
 version = "0.1.0"
-description = "Practical Python multiprocessing and parallel map-reduce examples"
+description = "A streaming, process-based map-reduce for Google Books Ngram data"
 readme = "README.md"
 requires-python = ">=3.10"
 authors = [{ name = "Akarsh" }]
@@ -17,7 +17,6 @@ classifiers = [
 
 [project.optional-dependencies]
 dev = ["ruff>=0.5"]
-examples = ["tqdm>=4.66"]
 
 [project.scripts]
 parallel-map-reduce = "parallel_map_reduce.cli:main"
