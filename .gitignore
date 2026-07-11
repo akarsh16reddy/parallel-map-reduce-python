@@ -1,0 +1,26 @@
+__pycache__/
+*.py[cod]
+*$py.class
+
+.venv/
+venv/
+.env
+
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+build/
+dist/
+*.egg-info/
+
+# Google Books Ngram data is hundreds of megabytes and must be downloaded locally.
+googlebooks-eng-all-1gram-*/
+googlebooks-eng-all-1gram-*.gz
+
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
